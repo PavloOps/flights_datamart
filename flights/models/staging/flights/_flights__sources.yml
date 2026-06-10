@@ -1,0 +1,51 @@
+sources:
+  - name: demo_src
+    description: "Данные из БД авиаперелетов"
+    tables:
+      - name: aircrafts
+        description: "Виды самолетов"
+        columns:
+          - name: aircraft_code
+            description: '{{ doc("aircrafts_description") }}'
+            tests:
+              - not_null
+              - unique
+          - name: model
+            description: "**[Read more](https://www.google.com/search?q=aircraft+code)**"
+          - name: range
+            description: "Дальность полета самолета"
+      - name: aircrafts_data
+        description: "Данные самолетов"
+      - name: airports
+        description: "Виды аэропортов"
+      - name: airports_data
+        description: "Данные аэропортов"
+      - name: boarding_passes
+        description: "Посадочные билеты"
+      - name: bookings
+        description: "Бронирования"
+        columns:
+          - name: book_ref
+          - name: book_date
+          - name: total_amount
+        freshness: 
+            warn_after:
+              count: 6
+              period: hour
+            error_after:
+              count: 1
+              period: day
+            filter: current_timestamp::date - book_date::date < 3
+        loaded_at_field: book_date::timestamp
+      - name: flights
+        description: "Рейсы"
+      - name: flights_v
+        description: "Подробные данные рейсов"
+      - name: routes
+        description: "Маршруты"
+      - name: seats
+        description: "Места в самолетах"
+      - name: ticket_flights
+        description: "Связь между билетами и рейсами"
+      - name: tickets
+        description: "Билеты"
