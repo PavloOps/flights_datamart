@@ -1,0 +1,80 @@
+sources:
+  - name: demo_src
+    description: "Данные из БД авиаперелетов по стадии полетов"
+    tables:
+      - name: boarding_passes
+        description: "Посадочные билеты"
+        columns:
+          - name: ticket_no
+            description: "Номер билета"
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: boarding_no
+            description: "Номер посадочного места"
+          - name: seat_no
+            description: "Номер места"
+      - name: bookings
+        description: "Бронирования"
+        columns:
+          - name: book_ref
+            description: "Номер бронирования"
+          - name: book_date
+            description: "Дата бронирования"
+          - name: total_amount
+            description: "Общая сумма бронирования"
+      - name: flights
+        description: "Рейсы"
+        freshness:
+          warn_after:
+            count: 6
+            period: hour
+          error_after:
+            count: 1
+            period: day
+          filter: current_timestamp::date - actual_departure::date < 3
+        loaded_at_field: actual_departure::timestamp
+        columns:
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: flight_no
+            description: "Номер рейса"
+          - name: scheduled_departure
+            description: "Запланированное время отправления"
+          - name: scheduled_arrival
+            description: "Запланированное время прибытия"
+          - name: departure_airport
+            description: "Аэропорт отправления"
+          - name: arrival_airport
+            description: "Аэропорт прибытия"
+          - name: status
+            description: "Статус рейса"
+          - name: aircraft_code
+            description: "Код самолета"
+          - name: actual_departure
+            description: "Фактическое время отправления"
+          - name: actual_arrival
+            description: "Фактическое время прибытия"
+      - name: ticket_flights
+        description: "Связь между билетами и рейсами"
+        columns:
+          - name: ticket_no
+            description: "Номер билета"
+          - name: flight_id
+            description: "Идентификатор рейса"
+          - name: fare_conditions
+            description: "Условия тарифа"
+          - name: amount
+            description: "Сумма"
+      - name: tickets
+        description: "Билеты"
+        columns:
+          - name: ticket_no
+            description: "Номер билета"
+          - name: book_ref
+            description: "Номер бронирования"
+          - name: passenger_id
+            description: "Идентификатор пассажира"
+          - name: passenger_name
+            description: "Имя пассажира"
+          - name: contact_data
+            description: "Контактные данные"
