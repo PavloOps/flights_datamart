@@ -1,0 +1,41 @@
+models:
+  - name: fct_bookings
+    description: Модель фактов бронирования авиарейсов
+    docs:
+      show: true
+      node_color: salmon
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: book_ref
+        data_type: varchar(8)
+        constraints:
+          - type: not_null
+      - name: book_date
+        data_type: timestamptz
+      - name: total_amount
+        data_type: numeric(10, 2)
+        constraints:
+          - type: check
+            expression: "total_amount > 0"
+        tests:
+          - not_null
+        meta:
+          owner: data_analytic
+        quote: true
+  - name: fct_ticket_flights
+    description: Модель данных фактических перелетах
+    docs:
+      show: true
+      node_color: green
+    meta:
+      owner: numpyme@gmail.com
+    columns:
+      - name: ticket_no
+      - name: flight_id
+      - name: fare_conditions
+      - name: amount
+      - name: boarding_pass_exists
+      - name: boarding_no
+      - name: seat_no
+      - name: load_date
