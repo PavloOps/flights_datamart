@@ -28,14 +28,41 @@ models:
     docs:
       show: true
       node_color: green
+    config:
+      contract: {enforced: true}
     meta:
       owner: numpyme@gmail.com
     columns:
       - name: ticket_no
+        description: Номер билета
+        data_type: bpchar(13)
+        constraints:
+          - type: not_null
       - name: flight_id
+        description: Идентификатор рейса
+        data_type: int4
+        constraints:
+          - type: not_null
       - name: fare_conditions
+        description: Условия тарифа
+        data_type: varchar(10)
       - name: amount
+        description: Сумма
+        data_type: numeric(10, 2)
+        constraints:
+          - type: check
+            expression: "amount > 0"
       - name: boarding_pass_exists
+        description: Посадочный талон был выдан
+        data_type: bool
+        constraints:
+          - type: check
+            expression: "boarding_pass_exists = false OR boarding_no IS NOT NULL"
       - name: boarding_no
+        description: номер посадочного талона
+        data_type: int4
       - name: seat_no
+        description: Номер места
+        data_type: varchar(4)
       - name: load_date
+        data_type: date
