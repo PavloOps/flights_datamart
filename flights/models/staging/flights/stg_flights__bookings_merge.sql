@@ -4,8 +4,7 @@
         incremental_strategy = 'merge',
         unique_key = ['book_ref'],
         tags = ['bookings'],
-        merge_update_columns = ['total_amount'],
-        merge_exclude_columns = ['book_date']
+        merge_update_columns = ['total_amount']
     )
 }}
 

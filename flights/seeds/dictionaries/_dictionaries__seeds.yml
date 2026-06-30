@@ -15,4 +15,15 @@ seeds:
         description: Название региона
         tests:
           - not_null
-  
+  - name: employee
+    description: Сотрудники авиакомпании
+    config: 
+      column_types:
+        id: varchar(20)
+        name: varchar(100)
+    columns:
+      - name: id
+        description: Уникальный идентификатор сотрудника
+        tests:
+          - not_null
+          - unique
