@@ -20,3 +20,6 @@ models:
   flights:
     example:
       +materialized: view
+seeds:
+  dbt_course:
+    schema: seeds
