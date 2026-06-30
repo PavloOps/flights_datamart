@@ -14,5 +14,5 @@ FROM {{ ref('stg_flights__tickets') }} a1
 WHERE a1.passenger_id NOT IN (
     SELECT
         DISTINCT id as passenger_id
-    FROM {{ ref('employees') }}
+    FROM {{ ref('employee') }}
     )
