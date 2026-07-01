@@ -5,6 +5,7 @@ seeds:
       column_types:
         city: varchar(50)
         region: varchar(100)
+        updated_at: timestamp
     columns:
       - name: city
         description: Название города
