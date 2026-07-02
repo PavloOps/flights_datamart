@@ -19,10 +19,13 @@ clean-targets:
 models:
   flights:
     intermediate:
+      +tags: ['intermediate']
       flights:
         +meta:
           owner: "dbt_project_yml@gmail.com"
           year_created: 2026
+    staging:
+      +tags: ['staging']
 seeds:
   dbt_course:
-    schema: seeds
+    +schema: seeds
