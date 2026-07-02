@@ -1,6 +1,10 @@
 {{
   config(
         materialized = 'table',
+        meta = {
+            'owner': 'sql_file_owner@gmail.com',
+            'description': 'This table contains the fact bookings data for flights.'
+        }
     )
 }}
 

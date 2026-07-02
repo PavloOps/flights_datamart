@@ -6,11 +6,13 @@ models:
       node_color: salmon
     config:
       contract: {enforced: true}
+      meta: {owner: "yml_file_owner@gmail.com", status: in_dev, my_meta: new}
     columns:
       - name: book_ref
         data_type: varchar(8)
         constraints:
           - type: not_null
+        tests: [not_null, unique]
       - name: book_date
         data_type: timestamptz
       - name: total_amount

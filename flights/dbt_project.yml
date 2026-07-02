@@ -18,8 +18,11 @@ clean-targets:
   - dbt_packages
 models:
   flights:
-    example:
-      +materialized: view
+    intermediate:
+      flights:
+        +meta:
+          owner: "dbt_project_yml@gmail.com"
+          year_created: 2026
 seeds:
   dbt_course:
     schema: seeds
