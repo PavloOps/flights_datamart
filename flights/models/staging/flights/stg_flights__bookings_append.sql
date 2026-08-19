@@ -9,7 +9,7 @@
 select
   {{ adapter.quote("book_ref") }},
   {{ adapter.quote("book_date") }},
-  {{ adapter.quote("total_amount") }}
+  {{- kopek_to_ruble('total_amount', 3) }} as total_amount
 
 from {{ source('demo_src', 'bookings') }}
 

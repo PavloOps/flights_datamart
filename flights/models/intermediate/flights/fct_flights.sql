@@ -14,5 +14,6 @@ SELECT
     {{ adapter.quote('aircraft_code') }} AS Aircraft_id,
     {{ adapter.quote('actual_departure') }} AS Actual_departure,
     {{ adapter.quote('actual_arrival') }} AS Actual_arrival,
+    {{ concat_columns(['departure_airport', 'arrival_airport'], delimiter=' -> ') }} AS "Route",
     CURRENT_DATE AS Load_date
 FROM {{ ref('stg_flights__flights') }}
