@@ -23,3 +23,15 @@
         {% if is_incremental() %}
             where scheduled_departure >= (select max(scheduled_departure) from {{ source('demo_src', 'flights') }}) - interval '100 days'
         {% endif %}
+
+{%- set source_relation = adapter.get_relation(
+    database=this.database,
+    schema=this.schema,
+    identifier=this.identifier
+) %}
+
+{% set wanted_columns = adapter.get_columns_in_relation(source_relation) %}
+
+{% for column in wanted_columns -%}
+    {{ 'Column: ' ~ column.name }}
+{% endfor %}
