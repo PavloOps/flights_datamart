@@ -72,4 +72,11 @@
 {# dbt run-operation drop_old_relations --args '{"dryrun": True}' #}
 {# dbt run-operation drop_old_relations #}
 {% endmacro %}
-    
+
+{% macro show_columns_relation(table_name) %}
+{%- set relation = ref(table_name) -%}
+{%- set columns = adapter.get_columns_in_relation(relation) -%}
+{% for column in columns %}
+    {{ adapter.quote(column.name) }}{% if not loop.last %}, {% endif %}
+{% endfor %}
+{% endmacro %}

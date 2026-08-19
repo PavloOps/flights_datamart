@@ -8,8 +8,6 @@
     )
 }}
 
-SELECT
-    {{ adapter.quote('book_ref') }},
-    {{ adapter.quote('book_date') }},
-    {{ adapter.quote('total_amount') }}
-FROM {{ ref('stg_flights__bookings') }}
+  select
+      {{ show_columns_relation('stg_flights__bookings') }}
+  from {{ ref('stg_flights__bookings') }}
